@@ -7,13 +7,13 @@ const FormInput = ({ handleChange, lable, ...otherProps }) => {
     <div className="group">
       <input className="form-input" onChange={handleChange} {...otherProps} />
       {lable ? (
-        <lable
+        <label
           className={`${
             otherProps.value.length ? "shrink" : ""
           } form-input-label`}
         >
           {lable}
-        </lable>
+        </label>
       ) : null}
     </div>
   );
