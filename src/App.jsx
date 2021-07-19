@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
@@ -12,6 +12,44 @@ import { setCurrentUser } from "./redux/user/user.actions";
 import "./App.css";
 
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
+
+// const App = () => {
+//   useEffect(() => {
+//     const unsubscribeFromAuth = null;
+//     unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+//       if (userAuth) {
+//         const userRef = await createUserProfileDocument(userAuth);
+//         userRef.onSnapshot((onSnapshot) => {
+//           setCurrentUser({
+//             id: onSnapshot.id,
+//             ...onSnapshot.data(),
+//           });
+//         });
+//       }
+//       setCurrentUser(userAuth);
+//     });
+//     return unsubscribeFromAuth;
+//   });
+
+//   return (
+//     <div className="App">
+//       <Header />
+//       <Switch>
+//         <Route exact path="/" component={HomePage} />
+//         <Route
+//           path="/signin"
+//           render={() =>
+//             currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+//           }
+//         />
+//         <Route path="/shop" component={ShopPage} />
+//       </Switch>
+//     </div>
+//   );
+// };
+
+// export default App;
+
 class App extends React.Component {
   unsubscribeFromAuth = null;
 

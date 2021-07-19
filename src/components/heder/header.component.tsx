@@ -10,8 +10,13 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import { auth } from "../../firebase/firebase.utils";
 
-const Header = ({ currentUser }) => {
-  console.log(currentUser);
+interface HeaderPropsType {
+  currentUser: any;
+  hidden: boolean;
+}
+
+const Header: React.FC<HeaderPropsType> = ({ currentUser, hidden }) => {
+  console.log("hidden", hidden);
   return (
     <div className="header">
       <Link className="logo-container" to="/">
@@ -39,16 +44,20 @@ const Header = ({ currentUser }) => {
           </Link>
         )}
         <CartIcon />
-        <Cart />
+        {hidden ? null : <Cart />}
       </div>
     </div>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: {
+  user: { currentUser: any };
+  cart: { hidden: any };
+}) => {
   console.log("state", state);
   return {
     currentUser: state.user.currentUser,
+    hidden: state.cart.hidden,
   };
 };
 
