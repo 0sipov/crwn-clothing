@@ -6,17 +6,21 @@ interface CustomButtonProps {
   children?: string;
   type: "submit" | "button";
   isGoogleSignIn?: boolean;
+  inverted?: true;
   onClick?: () => void;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
   children,
   isGoogleSignIn,
+  inverted,
   ...otherProps
 }) => {
   return (
     <button
-      className={`${isGoogleSignIn ? "google-sign-in" : ""} custom-button`}
+      className={`${inverted ? "inverted" : ""} ${
+        isGoogleSignIn ? "google-sign-in" : ""
+      } custom-button`}
       {...otherProps}
     >
       {children}
