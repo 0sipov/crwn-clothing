@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter } from "react-router";
+
 import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 
@@ -10,15 +12,26 @@ import "./cart-dropdown.styles.scss";
 
 class Cart extends React.Component {
   render() {
-    const { cartItems } = this.props;
+    const { cartItems, history } = this.props;
     return (
       <div className="cart-dropdown">
         <div className="cart-items">
-          {cartItems.map((cartItem) => (
-            <CartItem cartItem={cartItem} key={cartItem.id} />
-          ))}
+          {cartItems.length === 0 ? (
+            <span className="cart-message">Cart is empty</span>
+          ) : (
+            cartItems.map((cartItem) => (
+              <CartItem cartItem={cartItem} key={cartItem.id} />
+            ))
+          )}
         </div>
-        <CustomButton>CHECKOUT</CustomButton>
+
+        <CustomButton
+          onClick={() => {
+            history.push("/checkout");
+          }}
+        >
+          CHECKOUT
+        </CustomButton>
       </div>
     );
   }
@@ -28,4 +41,4 @@ const mapStateToProps = (state) => ({
   cartItems: selectCartItems(state),
 });
 
-export default connect(mapStateToProps)(Cart);
+export default withRouter(connect(mapStateToProps)(Cart));

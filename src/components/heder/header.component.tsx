@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
+import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectHidden } from "../../redux/cart/cart.selectors";
+
 import CartIcon from "../cart-icon/cart-icon.component";
 import Cart from "../cart-dropdown/cart-dropdown.component";
 
@@ -50,15 +53,9 @@ const Header: React.FC<HeaderPropsType> = ({ currentUser, hidden }) => {
   );
 };
 
-const mapStateToProps = (state: {
-  user: { currentUser: any };
-  cart: { hidden: any };
-}) => {
-  console.log("state", state);
-  return {
-    currentUser: state.user.currentUser,
-    hidden: state.cart.hidden,
-  };
-};
+const mapStateToProps = (state: any[]) => ({
+  currentUser: selectCurrentUser(state),
+  hidden: selectHidden(state),
+});
 
 export default connect(mapStateToProps)(Header);
