@@ -9,3 +9,39 @@ export const addItemToCart = (cartItems: any[], addedItem: { id: string }) => {
   }
   return [...cartItems, { ...addedItem, quantity: 1 }];
 };
+
+export const removeItemFromCart = (
+  cartItems: any[],
+  removedItem: { id: string }
+) => {
+  return cartItems.filter((item) => {
+    return item.id !== removedItem.id;
+  });
+};
+
+export const decreaseItemInCart = (
+  cartItems: any[],
+  decreasedItem: { id: string }
+) => {
+  return cartItems.map((item) => {
+    if (item.quantity === 0) {
+      return item;
+    }
+    if (item.id === decreasedItem.id) {
+      return { ...item, quantity: item.quantity - 1 };
+    }
+    return item;
+  });
+};
+
+export const enlargeItemInCart = (
+  cartItems: any[],
+  decreasedItem: { id: string }
+) => {
+  return cartItems.map((item) => {
+    if (item.id === decreasedItem.id) {
+      return { ...item, quantity: item.quantity + 1 };
+    }
+    return item;
+  });
+};

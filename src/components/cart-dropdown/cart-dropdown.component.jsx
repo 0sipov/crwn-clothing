@@ -5,6 +5,7 @@ import CustomButton from "../custom-button/custom-button.component";
 import CartItem from "../cart-item/cart-item.component";
 
 import { selectCartItems } from "../../redux/cart/cart.selectors";
+import cartActions from "../../redux/cart/cart.actions";
 
 import { connect } from "react-redux";
 
@@ -12,7 +13,7 @@ import "./cart-dropdown.styles.scss";
 
 class Cart extends React.Component {
   render() {
-    const { cartItems, history } = this.props;
+    const { cartItems, history, dispatch } = this.props;
     return (
       <div className="cart-dropdown">
         <div className="cart-items">
@@ -28,6 +29,7 @@ class Cart extends React.Component {
         <CustomButton
           onClick={() => {
             history.push("/checkout");
+            dispatch(cartActions.toggleCartHidden());
           }}
         >
           CHECKOUT

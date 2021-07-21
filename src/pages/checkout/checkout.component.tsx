@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+
 import {
   selectCartItems,
   selectCartTotal,
@@ -9,7 +11,12 @@ import {
 
 import "./checkout.styles.scss";
 
-const Checkout = ({ cartItems, total }) => {
+interface CheckoutProps {
+  cartItems: any[];
+  total: Number;
+}
+
+const Checkout: React.FC<CheckoutProps> = ({ cartItems, total }) => {
   return (
     <div className="checkout-page">
       <div className="checkout-header">
@@ -29,7 +36,9 @@ const Checkout = ({ cartItems, total }) => {
           <span>Remove</span>
         </div>
       </div>
-      {cartItems.map((item) => item.name)}
+      {cartItems.map((item) => (
+        <CheckoutItem key={item.id} cartItems={item} />
+      ))}
       <div className="total">
         <span>{total}$</span>
       </div>
