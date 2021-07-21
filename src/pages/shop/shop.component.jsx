@@ -1,15 +1,16 @@
 import React from "react";
+import { Route } from "react-router";
 
 import CollectionOverview from "../../components/collection-overview/collection-overview.component";
-class ShopPage extends React.Component {
-  render() {
-    console.log("props", this.props);
-    return (
-      <div className="shop-page">
-        <CollectionOverview />
-      </div>
-    );
-  }
-}
+import CollectionPage from "../../components/collection/collection.component";
+
+const ShopPage = ({ match }) => {
+  return (
+    <div className="shop-page">
+      <Route path={`${match.path}`} component={CollectionOverview} />
+      <Route path={`${match.path}/:categoryId`} component={CollectionPage} />
+    </div>
+  );
+};
 
 export default ShopPage;
